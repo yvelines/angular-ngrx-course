@@ -22,7 +22,7 @@ const routes: Routes = [
         canActivate: [],
     },
     {
-        path: "**",
+        path: '**',
         redirectTo: '/'
     }
 ];
