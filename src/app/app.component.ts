@@ -33,6 +33,6 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.store$.dispatch(new featureAuthActions.LogoutAction());
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
   }
 }

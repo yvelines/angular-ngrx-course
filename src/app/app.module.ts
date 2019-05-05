@@ -13,13 +13,14 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { metaReducers, reducers } from './reducers';
+import { AuthGuard } from './guards/auth.guars';
 
 
 const routes: Routes = [
     {
         path: 'courses',
         loadChildren: './courses/courses.module#CoursesModule',
-        canActivate: [],
+        canActivate: [AuthGuard],
     },
     {
         path: '**',

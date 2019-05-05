@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './store/auth.reducer';
+import { AuthGuard } from '../guards/auth.guars';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import * as fromAuth from './store/auth.reducer';
         MatCardModule,
         MatInputModule,
         MatButtonModule,
-        RouterModule.forChild([{ path: '', component: LoginComponent }]),
+        RouterModule.forChild([
+            { path: '', component: LoginComponent }
+        ]),
         StoreModule.forFeature('auth', fromAuth.authReducer),
 
     ],
@@ -29,7 +32,10 @@ export class AuthModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: AuthModule,
-            providers: [AuthService]
+            providers: [
+                AuthService,
+                AuthGuard
+            ]
         };
     }
 }
