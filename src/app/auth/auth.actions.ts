@@ -6,9 +6,13 @@ export enum AuthActionTypes {
     LogoutAction = '[Logout] Action'
 }
 
-export class Login implements Action {
+export class LoginAction implements Action {
     readonly type = AuthActionTypes.LoginAction;
     constructor(public payload: { user: User }) { }
 }
 
-export type AuthActions = Login;
+export class LogoutAction implements Action {
+    readonly type = AuthActionTypes.LogoutAction;
+}
+
+export type AuthActions = LoginAction | LogoutAction;
