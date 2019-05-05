@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(email, password)
       .pipe(
         tap((user: User) => {
-          this.store$.dispatch(new featureAuthActions.Login({ user }));
+          this.store$.dispatch(new featureAuthActions.LoginAction({ user }));
           this.router.navigateByUrl('/courses');
         }),
         catchError((error) => { alert(`Login failed... ${error.status}`); return of(undefined); })
