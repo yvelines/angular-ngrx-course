@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 import * as featureAuthActions from './auth/store/auth.actions';
 import { AppState } from './reducers';
 import { partition, Observable } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
 import { AuthState } from './auth/store/auth.reducer';
+import { isLoggedInSelector, isLoggedOutSelector } from './auth/store/auth.selectors';
 
 
 
@@ -17,9 +18,6 @@ import { AuthState } from './auth/store/auth.reducer';
 })
 export class AppComponent implements OnInit {
 
-  public isLoggedIn: boolean;
-  public isLoggedOut: boolean;
-
   public isLoggedIn$: Observable<boolean>;
   public isLoggedOut$: Observable<boolean>;
 
@@ -29,20 +27,8 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    [this.isLoggedIn$, this.isLoggedOut$] =
-      partition(this.store$.pipe(map((state: any) => state.auth.loggedIn)
-      ), (loggedIn: boolean) => loggedIn);
-
-    this.isLoggedIn$
-      .pipe(
-        tap((isLoggedIn: boolean) => { this.isLoggedIn = isLoggedIn; this.isLoggedOut = !isLoggedIn; }),
-      ).subscribe(() => console.log('this.isLoggedIn => ', this.isLoggedIn));
-
-    this.isLoggedOut$
-      .pipe(
-        tap((isLoggedIn: boolean) => { this.isLoggedIn = isLoggedIn; this.isLoggedOut = !isLoggedIn; })
-      ).subscribe(() => console.log('this.isLoggedOut => ', this.isLoggedOut));
+    this.isLoggedIn$ = this.store$.pipe(select(isLoggedInSelector));
+    this.isLoggedOut$ = this.store$.pipe(select(isLoggedOutSelector));
   }
 
   logout() {
