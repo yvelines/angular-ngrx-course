@@ -1,4 +1,4 @@
-import { User } from '../model/user.model';
+import { User } from '../../model/user.model';
 import { AuthActions, LoginAction, LogoutAction, AuthActionTypes } from './auth.actions';
 
 export interface AuthState {
@@ -11,7 +11,7 @@ export const initialState: AuthState = {
   user: undefined
 };
 
-const loginActionReducer = (state: AuthState, action: LoginAction): AuthState => {
+const loginReducer = (state: AuthState, action: LoginAction): AuthState => {
   return {
     ...state,
     loggedIn: true,
@@ -19,7 +19,7 @@ const loginActionReducer = (state: AuthState, action: LoginAction): AuthState =>
   };
 };
 
-const logoutActionReducer = (state: AuthState, action: LogoutAction): AuthState => {
+const logoutReducer = (state: AuthState, action: LogoutAction): AuthState => {
   return {
     ...state,
     loggedIn: false,
@@ -30,12 +30,11 @@ const logoutActionReducer = (state: AuthState, action: LogoutAction): AuthState 
 
 export function authReducer(state = initialState, action: AuthActions): AuthState {
   switch (action.type) {
-
     case AuthActionTypes.LoginAction:
-      return loginActionReducer(state, action);
+      return loginReducer(state, action);
 
     case AuthActionTypes.LogoutAction:
-      return logoutActionReducer(state, action);
+      return logoutReducer(state, action);
 
     default:
       return state;

@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromAuth from './auth.reducer';
+import * as fromAuth from './store/auth.reducer';
 
 
 @NgModule({
