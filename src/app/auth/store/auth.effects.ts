@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { defer } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { AuthActionTypes, LoginAction } from './auth.actions';
+import { AuthActionTypes, LoginAction, LogoutAction } from './auth.actions';
 
 
 @Injectable()
@@ -27,6 +28,14 @@ export class AuthEffects {
       console.log(action.user);
     })
   );
+
+  @Effect()
+  init$ = defer(() => {
+    const userData: any = localStorage.getItem('user');
+    return userData
+      ? [new LoginAction({ user: JSON.parse(userData) })]
+      : [new LogoutAction()];
+  });
 
   constructor(
     private actions$: Actions,
