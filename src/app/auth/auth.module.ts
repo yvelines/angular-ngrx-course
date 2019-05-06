@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './store/auth.reducer';
 import { AuthGuard } from '../guards/auth.guars';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth.effects';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { AuthGuard } from '../guards/auth.guars';
             { path: '', component: LoginComponent }
         ]),
         StoreModule.forFeature('auth', fromAuth.authReducer),
+        EffectsModule.forFeature([AuthEffects]),
 
     ],
     declarations: [LoginComponent]

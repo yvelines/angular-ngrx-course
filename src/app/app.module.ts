@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { metaReducers, reducers } from './reducers';
 import { AuthGuard } from './guards/auth.guars';
+import { EffectsModule } from '@ngrx/effects';
 
 
 const routes: Routes = [
@@ -45,10 +46,13 @@ const routes: Routes = [
         MatToolbarModule,
         AuthModule.forRoot(),
         StoreModule.forRoot(reducers, { metaReducers }),
+        EffectsModule.forRoot([]), // This is not added with the schematics ... maybe an error....
         !environment.production ? StoreDevtoolsModule.instrument() : [],
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule {
 }
