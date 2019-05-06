@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   public isLoggedOut$: Observable<boolean>;
 
   constructor(
-    private router: Router,
     private store$: Store<any>
   ) { }
 
@@ -33,6 +32,5 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.store$.dispatch(new featureAuthActions.LogoutAction());
-    this.router.navigateByUrl('/login');
   }
 }
