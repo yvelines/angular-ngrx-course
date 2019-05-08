@@ -20,3 +20,5 @@ export class CourseLoaded implements Action {
 
 
 export type CourseActions = CourseRequested | CourseLoaded;
+
+
