@@ -7,7 +7,7 @@ import { AuthService } from '../auth.service';
 import { tap, catchError } from 'rxjs/operators';
 import { noop, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { AppState } from '../../reducers';
+import { AppState } from '../../store/reducers';
 import { pipe } from '@angular/core/src/render3';
 import { User } from '../../model/user.model';
 import * as featureAuthActions from '../store/auth.actions';

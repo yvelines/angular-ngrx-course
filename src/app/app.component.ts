@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 
 import * as featureAuthActions from './auth/store/auth.actions';
-import { AppState } from './reducers';
+import { AppState } from './store/reducers';
 import { partition, Observable } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
 import { AuthState } from './auth/store/auth.reducer';

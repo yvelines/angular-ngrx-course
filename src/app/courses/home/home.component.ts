@@ -3,7 +3,7 @@ import { Course } from '../model/course';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoursesService } from '../services/courses.service';
-import { AppState } from '../../reducers';
+import { AppState } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 
 @Component({

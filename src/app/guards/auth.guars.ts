@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, noop } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../reducers';
+import { AppState } from '../store/reducers';
 import { isLoggedInSelector } from '../auth/store/auth.selectors';
 import { tap } from 'rxjs/operators';
 
