@@ -19,3 +19,5 @@ export function coursesReducer(state: CoursesState = initialCourseState, action:
         }
     }
 }
+
+export const { selectAll } = adapter.getSelectors();

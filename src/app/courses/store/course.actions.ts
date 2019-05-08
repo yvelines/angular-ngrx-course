@@ -23,7 +23,7 @@ export class CourseLoaded implements Action {
 export class AllCoursesRequested implements Action {
     readonly type = CourseActionTypes.AllCoursesRequested;
 
-    constructor(public payload: { courseId: number }) { }
+    constructor() { }
 }
 
 export class AllCoursesLoaded implements Action {
