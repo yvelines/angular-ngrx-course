@@ -34,7 +34,7 @@ import { coursesReducer } from './store/course.reducers';
 
 export const coursesRoutes: Routes = [
     {
-        path: "",
+        path: '',
         component: HomeComponent
 
     },
