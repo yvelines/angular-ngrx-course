@@ -2,8 +2,8 @@ import { Action } from '@ngrx/store';
 import { Course } from '../model/course';
 
 export enum CourseActionTypes {
-    CourseRequested = '[View course Page] Course requested',
-    CourseLoaded = '[Course API] Course Loaded'
+    CourseRequested = '[ View course Page ] Course requested',
+    CourseLoaded = ' [ Course API ] Course Loaded'
 }
 
 export class CourseRequested implements Action {
