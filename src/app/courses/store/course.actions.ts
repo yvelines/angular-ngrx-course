@@ -29,7 +29,7 @@ export class AllCoursesRequested implements Action {
 export class AllCoursesLoaded implements Action {
     readonly type = CourseActionTypes.AllCoursesLoaded;
 
-    constructor(public payload: { course: Course[] }) { }
+    constructor(public payload: { courses: Course[] }) { }
 }
 
 export type CourseActions =

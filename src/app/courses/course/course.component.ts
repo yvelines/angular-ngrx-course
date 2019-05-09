@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { tap } from 'rxjs/operators';
+
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
-import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
-import { merge, fromEvent } from 'rxjs';
 import { LessonsDataSource } from '../services/lessons.datasource';
 
 
@@ -23,10 +23,9 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
-    constructor(private route: ActivatedRoute,
+    constructor(
+        private route: ActivatedRoute,
         private coursesService: CoursesService) {
-
     }
 
     ngOnInit() {
@@ -55,6 +54,4 @@ export class CourseComponent implements OnInit, AfterViewInit {
     selectedCourse({ course }: any) {
         this.course = course;
     }
-
-
 }
