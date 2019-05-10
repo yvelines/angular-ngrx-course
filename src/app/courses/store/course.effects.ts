@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { select, Store, Action } from '@ngrx/store';
-import { filter, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import { filter, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { AppState } from '../../store/reducers';
 import { CoursesService } from '../services/courses.service';
-import { AllCoursesLoaded, CourseActionTypes, CourseLoaded, CourseRequested, CourseActions } from './course.actions';
-import { selectAllCourses, selectIsAllCoursesLoaded } from './course.selectors';
+import { AllCoursesLoaded, CourseActions, CourseActionTypes, CourseLoaded, CourseRequested } from './course.actions';
+import { selectIsAllCoursesLoaded } from './course.selectors';
 
 
 @Injectable()
@@ -23,7 +23,7 @@ export class CourseEffects {
     loadAllCourses$ = this.actions$.pipe(
         ofType<CourseRequested>(CourseActionTypes.AllCoursesRequested),
         withLatestFrom(this.store$.pipe(select(selectIsAllCoursesLoaded))),
-        filter(([action, isAllCoursesLoaded]: [CourseActions, boolean]) => !isAllCoursesLoaded),
+        filter(([, isAllCoursesLoaded]: [CourseActions, boolean]) => !isAllCoursesLoaded),
         switchMap(() => this.coursesService.findAllCourses()),
         map(courses => new AllCoursesLoaded({ courses }))
     );

@@ -29,7 +29,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this.selectedCourse(this.route.snapshot.data);
+        this.selectedCourse(this.route.snapshot.data.course);
         this.dataSource = new LessonsDataSource(this.coursesService);
         this.dataSource.loadLessons(this.course.id, 0, 3);
     }
@@ -51,7 +51,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
             this.paginator.pageSize);
     }
 
-    selectedCourse({ course }: any) {
+    selectedCourse(course: Course) {
         this.course = course;
     }
 }

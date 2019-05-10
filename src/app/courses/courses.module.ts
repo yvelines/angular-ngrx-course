@@ -29,6 +29,7 @@ import { CoursesService } from './services/courses.service';
 import { CourseEffects } from './store/course.effects';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducer } from './store/course.reducers';
+import { CourseDispatcherService } from './store/course.dispatchers';
 
 
 
@@ -76,7 +77,8 @@ export const coursesRoutes: Routes = [
     entryComponents: [CourseDialogComponent],
     providers: [
         CoursesService,
-        CourseResolver
+        CourseResolver,
+        CourseDispatcherService
     ]
 })
 export class CoursesModule {
