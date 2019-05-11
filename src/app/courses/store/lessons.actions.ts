@@ -30,7 +30,7 @@ export class LessonsPageCancelled implements Action {
 
 export type LessonsActions =
     LessonsPageRequested
-    | LessonsPageRequested
+    | LessonsPageLoaded
     | LessonsPageCancelled;
 
 

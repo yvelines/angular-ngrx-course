@@ -17,37 +17,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
-import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
-import { CourseComponent } from './course/course.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
-import { HomeComponent } from './home/home.component';
+import { CoursesRoutingModule } from './courses.routing.module';
 import { CourseResolver } from './services/course.resolver';
 import { CoursesService } from './services/courses.service';
-import { CourseEffects } from './store/course.effects';
-import { StoreModule } from '@ngrx/store';
-import { coursesReducer } from './store/course.reducers';
 import { CourseDispatcherService } from './store/course.dispatchers';
-
-
-
-export const coursesRoutes: Routes = [
-    {
-        path: '',
-        component: HomeComponent
-
-    },
-    {
-        path: ':id',
-        component: CourseComponent,
-        resolve: {
-            course: CourseResolver
-        }
-    }
-];
-
+import { CourseEffects } from './store/course.effects';
+import { coursesReducer } from './store/course.reducers';
+import { lessonsReducer } from './store/lessons.reducers';
 
 
 @NgModule({
@@ -68,20 +49,28 @@ export const coursesRoutes: Routes = [
         MatDatepickerModule,
         MatMomentDateModule,
         ReactiveFormsModule,
-        RouterModule.forChild(coursesRoutes),
         StoreModule.forFeature('courses', coursesReducer),
-        EffectsModule.forFeature([CourseEffects])
+        StoreModule.forFeature('lessons', lessonsReducer),
+        EffectsModule.forFeature([CourseEffects]),
+        CoursesRoutingModule,
     ],
-    declarations: [HomeComponent, CoursesCardListComponent, CourseDialogComponent, CourseComponent],
-    exports: [HomeComponent, CoursesCardListComponent, CourseDialogComponent, CourseComponent],
-    entryComponents: [CourseDialogComponent],
+    declarations: [
+        ...CoursesRoutingModule.components,
+        CoursesCardListComponent,
+        CourseDialogComponent
+    ],
+    exports: [
+        ...CoursesRoutingModule.components,
+        CoursesCardListComponent,
+        CourseDialogComponent,
+    ],
+    entryComponents: [
+        CourseDialogComponent
+    ],
     providers: [
         CoursesService,
         CourseResolver,
         CourseDispatcherService
     ]
 })
-export class CoursesModule {
-
-
-}
+export class CoursesModule { }
