@@ -33,6 +33,12 @@ export function lessonsReducer(state = initialLessonsState, action: LessonsActio
                 ...state,
                 loading: false
             });
+        case LessonActionTypes.LessonsPageCancelled:
+            return {
+                ...state,
+                loading: false
+            };
+
         default:
             return state;
     }

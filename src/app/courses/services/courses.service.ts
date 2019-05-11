@@ -2,16 +2,22 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Course } from '../model/course';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Lesson } from '../model/lesson';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/reducers';
+import { LessonsPageCancelled } from '../store/lessons/lessons.actions';
 
 
 @Injectable()
 export class CoursesService {
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private store$: Store<AppState>
+    ) { }
 
     findCourseById(courseId: number): Observable<Course> {
         return this.http.get<Course>(`/api/courses/${courseId}`);
@@ -47,7 +53,12 @@ export class CoursesService {
                 .set('pageNumber', pageNumber.toString())
                 .set('pageSize', pageSize.toString())
         }).pipe(
-            map(res => res['payload'])
+            map(res => res['payload']),
+            catchError(err => {
+                console.log('error loading a lesson page', err);
+                this.store$.dispatch(new LessonsPageCancelled());
+                return of([]);
+            }),
         );
     }
 
