@@ -27,5 +27,10 @@ export const selectLessonsPage = (courseId: number, page: PageQuery) => createSe
     }
 );
 
+export const selectLessonsLoading = createSelector(
+    selectLessonstate,
+    state => state.loading
+);
+
 
 
