@@ -5,7 +5,7 @@ import { LessonsActions, LessonActionTypes } from './lessons.actions';
 
 const sortByCourseAndseqNo = (l1: Lesson, l2: Lesson) => {
     const compare = l1.courseId - l2.courseId;
-    return (compare !== 0) ? compare : (l1.seqNo - l2.seqNo)
+    return (compare !== 0) ? compare : (l1.seqNo - l2.seqNo);
 };
 
 export interface LessonState extends EntityState<Lesson> { }

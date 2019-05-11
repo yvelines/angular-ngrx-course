@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { PageQuery } from './lessons.actions';
 import * as fromLessons from './lessons.reducers';
-import { Lesson } from '../model/lesson';
+import { Lesson } from '../../model/lesson';
 
 
 const calcPagination = (page: PageQuery): [number, number] => {
@@ -23,7 +23,7 @@ export const selectLessonsPage = (courseId: number, page: PageQuery) => createSe
     selectAllLessons,
     allLessons => {
         const [start, end] = calcPagination(page);
-        allLessons.filter((lesson: Lesson) => lesson.courseId === courseId).slice(start, end);
+        return allLessons.filter((lesson: Lesson) => lesson.courseId === courseId).slice(start, end);
     }
 );
 
