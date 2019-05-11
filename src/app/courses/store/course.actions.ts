@@ -9,7 +9,6 @@ export enum CourseActionTypes {
     AllCoursesLoaded = ' [ Courses API ] All courses Loaded',
     CourseSaved = ' [ Edit Course Dialog ] Course Saved',
 }
-
 export class CourseRequested implements Action {
     readonly type = CourseActionTypes.CourseRequested;
 
