@@ -6,6 +6,8 @@ import { tap } from 'rxjs/operators';
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { LessonsDataSource } from '../services/lessons.datasource';
+import { AppState } from '../../store/reducers';
+import { Store } from '@ngrx/store';
 
 
 @Component({
@@ -24,13 +26,13 @@ export class CourseComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(
-        private route: ActivatedRoute,
-        private coursesService: CoursesService) {
+        private store$: Store<AppState>,
+        private route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.selectedCourse(this.route.snapshot.data.course);
-        this.dataSource = new LessonsDataSource(this.coursesService);
+        this.dataSource = new LessonsDataSource(this.store$);
         this.dataSource.loadLessons(this.course.id, 0, 3);
     }
 
@@ -45,10 +47,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
     }
 
     loadLessonsPage() {
-        this.dataSource.loadLessons(
-            this.course.id,
-            this.paginator.pageIndex,
-            this.paginator.pageSize);
+        // this.dataSource.loadLessons(this.course.id,     );
     }
 
     selectedCourse(course: Course) {

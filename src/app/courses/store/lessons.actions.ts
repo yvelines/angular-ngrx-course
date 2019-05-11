@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Lesson } from '../model/lesson';
 
-interface PageQuery {
+export interface PageQuery {
     pageIndex: number;
     pageSize: number;
 }
