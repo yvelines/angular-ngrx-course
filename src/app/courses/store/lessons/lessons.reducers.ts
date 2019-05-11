@@ -8,20 +8,31 @@ const sortByCourseAndseqNo = (l1: Lesson, l2: Lesson) => {
     return (compare !== 0) ? compare : (l1.seqNo - l2.seqNo);
 };
 
-export interface LessonState extends EntityState<Lesson> { }
+export interface LessonState extends EntityState<Lesson> {
+    loading: boolean;
+}
 
 export const adapter: EntityAdapter<Lesson> = createEntityAdapter<Lesson>({
     sortComparer: sortByCourseAndseqNo
 });
 
-const initialLessonsState = adapter.getInitialState();
+const initialLessonsState = adapter.getInitialState({
+    loading: true
+});
 
 export function lessonsReducer(state = initialLessonsState, action: LessonsActions): LessonState {
 
     switch (action.type) {
-        case LessonActionTypes.LessonsPageLoaded:
-            return adapter.addMany(action.payload.lessons, state);
         case LessonActionTypes.LessonsPageRequested:
+            return {
+                ...state,
+                loading: true
+            };
+        case LessonActionTypes.LessonsPageLoaded:
+            return adapter.addMany(action.payload.lessons, {
+                ...state,
+                loading: false
+            });
         default:
             return state;
     }

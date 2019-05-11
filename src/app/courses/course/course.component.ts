@@ -8,6 +8,7 @@ import { AppState } from '../../store/reducers';
 import { Course } from '../model/course';
 import { LessonsDataSource } from '../services/lessons.datasource';
 import { PageQuery } from '../store/lessons/lessons.actions';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
     pageSize = 3;
 
-
+    loading$: Observable<boolean>;
 
     constructor(
         private store$: Store<AppState>,
