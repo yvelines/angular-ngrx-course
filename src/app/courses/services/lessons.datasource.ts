@@ -1,14 +1,12 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { catchError, tap, finalize } from 'rxjs/operators';
 
-import { Lesson } from '../model/lesson';
-import { CoursesService } from './courses.service';
-import { Store, select } from '@ngrx/store';
 import { AppState } from '../../store/reducers';
-import { PageQuery } from '../store/lessons.actions';
+import { Lesson } from '../model/lesson';
+import { LessonsPageRequested, PageQuery } from '../store/lessons/lessons.actions';
 import { selectLessonsPage } from '../store/lessons/lessons.selectors';
-import { LessonsPageRequested } from '../store/lessons/lessons.actions';
 
 
 export class LessonsDataSource implements DataSource<Lesson> {
@@ -19,9 +17,7 @@ export class LessonsDataSource implements DataSource<Lesson> {
 
     constructor(
         private store$: Store<AppState>
-    ) {
-
-    }
+    ) { }
 
     loadLessons(courseId: number, page: PageQuery) {
         this.store$
@@ -30,7 +26,7 @@ export class LessonsDataSource implements DataSource<Lesson> {
                 tap((lessons: Lesson[]) => {
                     (lessons.length)
                         ? this.lessonsSubject.next(lessons)
-                        : this.store$.dispatch(new LessonsPageRequested({ courseId, page }))
+                        : this.store$.dispatch(new LessonsPageRequested({ courseId, page }));
                 }),
                 catchError(() => of([]))
             ).subscribe();

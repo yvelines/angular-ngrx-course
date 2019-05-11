@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
-import { CourseDispatcherService } from '../store/course.dispatchers';
+import { CourseDispatcherService } from '../store/course/course.dispatchers';
 
 @Component({
     selector: 'course-dialog',

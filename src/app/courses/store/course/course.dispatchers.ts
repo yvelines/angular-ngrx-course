@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 
-import { AppState } from '../../store/reducers';
-import { Course } from '../model/course';
+import { AppState } from '../../../store/reducers';
+import { Course } from '../../model/course';
 import { CourseSaved, CourseRequested } from './course.actions';
 
 @Injectable()

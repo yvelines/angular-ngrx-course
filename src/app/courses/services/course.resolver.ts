@@ -6,8 +6,8 @@ import { filter, first, tap } from 'rxjs/operators';
 
 import { AppState } from '../../store/reducers';
 import { Course } from '../model/course';
-import { CourseDispatcherService } from '../store/course.dispatchers';
-import { selectCourseById } from '../store/course.selectors';
+import { CourseDispatcherService } from '../store/course/course.dispatchers';
+import { selectCourseById } from '../store/course/course.selectors';
 
 
 @Injectable()

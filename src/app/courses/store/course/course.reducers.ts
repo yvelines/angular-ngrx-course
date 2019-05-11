@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { Course } from '../model/course';
+import { Course } from '../../model/course';
 import { CourseActions, CourseActionTypes } from './course.actions';
 
 // tslint:disable-next-line: no-empty-interface

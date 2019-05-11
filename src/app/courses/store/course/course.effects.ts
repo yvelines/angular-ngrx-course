@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { filter, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 
-import { AppState } from '../../store/reducers';
-import { CoursesService } from '../services/courses.service';
+import { AppState } from '../../../store/reducers';
+import { CoursesService } from '../../services/courses.service';
 import { AllCoursesLoaded, CourseActions, CourseActionTypes, CourseLoaded, CourseRequested } from './course.actions';
 import { selectIsAllCoursesLoaded } from './course.selectors';
 

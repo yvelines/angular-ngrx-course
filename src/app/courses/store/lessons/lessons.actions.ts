@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Lesson } from '../model/lesson';
+import { Lesson } from '../../model/lesson';
 
 export interface PageQuery {
     pageIndex: number;

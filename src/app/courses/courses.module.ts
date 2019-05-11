@@ -25,10 +25,11 @@ import { CoursesCardListComponent } from './courses-card-list/courses-card-list.
 import { CoursesRoutingModule } from './courses.routing.module';
 import { CourseResolver } from './services/course.resolver';
 import { CoursesService } from './services/courses.service';
-import { CourseDispatcherService } from './store/course.dispatchers';
-import { CourseEffects } from './store/course.effects';
-import { coursesReducer } from './store/course.reducers';
-import { lessonsReducer } from './store/lessons.reducers';
+import { CourseDispatcherService } from './store/course/course.dispatchers';
+import { CourseEffects } from './store/course/course.effects';
+import { coursesReducer } from './store/course/course.reducers';
+import { lessonsReducer } from './store/lessons/lessons.reducers';
+import { LessonsEffects } from './store/lessons/lessons.effects';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { lessonsReducer } from './store/lessons.reducers';
         ReactiveFormsModule,
         StoreModule.forFeature('courses', coursesReducer),
         StoreModule.forFeature('lessons', lessonsReducer),
-        EffectsModule.forFeature([CourseEffects]),
+        EffectsModule.forFeature([CourseEffects, LessonsEffects]),
         CoursesRoutingModule,
     ],
     declarations: [

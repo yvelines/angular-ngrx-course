@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
-import { Course } from '../model/course';
-import { CoursesService } from '../services/courses.service';
-import { LessonsDataSource } from '../services/lessons.datasource';
 import { AppState } from '../../store/reducers';
-import { Store } from '@ngrx/store';
+import { Course } from '../model/course';
+import { LessonsDataSource } from '../services/lessons.datasource';
+import { PageQuery } from '../store/lessons/lessons.actions';
 
 
 @Component({
@@ -17,13 +17,17 @@ import { Store } from '@ngrx/store';
 })
 export class CourseComponent implements OnInit, AfterViewInit {
 
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     course: Course;
 
     dataSource: LessonsDataSource;
 
     displayedColumns = ['seqNo', 'description', 'duration'];
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    pageSize = 3;
+
+
 
     constructor(
         private store$: Store<AppState>,
@@ -33,7 +37,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.selectedCourse(this.route.snapshot.data.course);
         this.dataSource = new LessonsDataSource(this.store$);
-        this.dataSource.loadLessons(this.course.id, 0, 3);
+        this.dataSource.loadLessons(this.course.id, this.getPaginatorState());
     }
 
     ngAfterViewInit() {
@@ -41,16 +45,23 @@ export class CourseComponent implements OnInit, AfterViewInit {
         this.paginator.page
             .pipe(
                 tap(() => this.loadLessonsPage())
-            )
-            .subscribe();
+            ).subscribe();
 
     }
 
     loadLessonsPage() {
-        // this.dataSource.loadLessons(this.course.id,     );
+        this.dataSource.loadLessons(this.course.id, this.getPaginatorState());
     }
 
     selectedCourse(course: Course) {
         this.course = course;
+    }
+
+    private getPaginatorState(): PageQuery {
+        return {
+            pageIndex: this.paginator.pageIndex,
+            pageSize: this.paginator.pageSize || this.pageSize
+        };
+
     }
 }

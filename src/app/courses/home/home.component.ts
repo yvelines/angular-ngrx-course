@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
 import { CoursesService } from '../services/courses.service';
 import { AppState } from '../../store/reducers';
 import { Store, select } from '@ngrx/store';
-import { AllCoursesRequested } from '../store/course.actions';
-import { selectAllCourses, selectCoursesByCategory, selectCountCoursesInPromo } from '../store/course.selectors';
+import { AllCoursesRequested } from '../store/course/course.actions';
+import { selectAllCourses, selectCoursesByCategory, selectCountCoursesInPromo } from '../store/course/course.selectors';
 
 @Component({
     selector: 'home',
